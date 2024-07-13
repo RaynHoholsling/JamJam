@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssaultRifle : MonoBehaviour
+public class Pistol : MonoBehaviour
 {
     [SerializeField] private Sprite AR_sprite;
     [SerializeField] private GameObject bullet_projectile;
