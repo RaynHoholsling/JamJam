@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private bool facingRight = true;
-    [SerializeField] private GameObject doors;
+    [SerializeField] private GameObject player;
 
     Vector2 movement;
 
@@ -16,6 +16,11 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    //if (collision.CompareTag("warningTrigger"))
+    //    Destroy(other.gameObject);      
+    //}
 
     void Update()
     {
@@ -36,24 +41,22 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        if (gameObject == null)
-        {
-            string currentSceneName = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(currentSceneName);
-        }
     }
-
+    private void OnDestroy()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
     private void Flip()
     {
         facingRight = !facingRight;
         Vector3 Scaler = transform.localScale;
-        //Vector3 WeaponScaler = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Transform>().localScale;
-        //Scaler.x *= -1;
-        //transform.localScale = Scaler;
-        //WeaponScaler.x *= -1;
-        //WeaponScaler.y *= -1;
-        //GameObject.FindGameObjectWithTag("Weapon").GetComponent<Transform>().localScale = WeaponScaler;
+        Vector3 WeaponScaler = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Transform>().localScale;
+        Scaler.x *= -1;
+        transform.localScale = Scaler;
+        WeaponScaler.x *= -1;
+        WeaponScaler.y *= -1;
+        GameObject.FindGameObjectWithTag("Weapon").GetComponent<Transform>().localScale = WeaponScaler;
     }
 
     //private void OnTriggerEnter2D(Collider2D other)
