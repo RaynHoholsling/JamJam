@@ -6,11 +6,9 @@ public class Kar98 : MonoBehaviour
 {
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform shotPoint;
-
     [SerializeField] private float reloadStart;
     [SerializeField] private int magazineSizeStart;
     [SerializeField] private float fireRate;
-
     [SerializeField] private float magazineSize;
 
     public bool shotCooldownEnded = true;

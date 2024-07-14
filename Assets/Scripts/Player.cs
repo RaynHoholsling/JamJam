@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Animations;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -9,12 +10,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private bool facingRight = true;
     [SerializeField] private GameObject player;
-
+    Animator animator;
     Vector2 movement;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
     //private void OnTriggerEnter2D(Collider2D other)
     //{
@@ -26,6 +28,10 @@ public class Player : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        if (animator)
+        {
+            animator.SetBool("Run", Mathf.Abs(movement.x) >= 0.1f);
+        }
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (!facingRight && mousePosition.x > transform.position.x)

@@ -11,10 +11,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float followSpeed;
     [SerializeField] private int damage;
     [SerializeField] private Transform bulletHit;
-    [SerializeField] private GameObject player;
-
+    [SerializeField] private GameObject Player;
+    Animator animator;
     private bool isFlipped = false; 
-    private bool facingRight = false;
+    private bool facingRight = true;
 
     private Transform nextSpot;
     public Transform[] moveSpots;
@@ -28,14 +28,22 @@ public class Enemy : MonoBehaviour
     {
         waitTime = startWaitTime;
         nextSpot = moveSpots[0];
+        animator = GetComponent<Animator>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject);
+        if (collision.tag == "Player")
+        {
+            Destroy(collision.gameObject);
+        }
     }
     private void Update()
     {
-        if(hp <= 0)
+        if (animator)
+        {
+            animator.SetBool("Run", Mathf.Abs(waitTime) >= startWaitTime);
+        }
+        if (hp <= 0)
         {
             Destroy(gameObject);
         }
@@ -47,15 +55,15 @@ public class Enemy : MonoBehaviour
             if (waitTime <= 0)
             {
                 nextSpot = moveSpots[i];
-                if(transform.position.x < nextSpot.GetComponent<Transform>().position.x && isFlipped == false)
-                {
-                    Flip();
-                    isFlipped = true;
-                }
-                else if(transform.position.x > nextSpot.GetComponent<Transform>().position.x && isFlipped == true)
+                if(transform.position.x < nextSpot.GetComponent<Transform>().position.x && isFlipped == true)
                 {
                     Flip();
                     isFlipped = false;
+                }
+                else if(transform.position.x > nextSpot.GetComponent<Transform>().position.x && isFlipped == false)
+                {
+                    Flip();
+                    isFlipped = true;
                 }
 
                 if (i == moveSpots.Length - 1)
