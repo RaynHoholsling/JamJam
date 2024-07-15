@@ -18,9 +18,12 @@ public class Enemy : MonoBehaviour
 
     private Transform nextSpot;
     public Transform[] moveSpots;
-    private float waitTime;
+    [SerializeField]  private float waitTime;
     public float startWaitTime;
     private bool warning = false;
+    [SerializeField] private bool _playerSpotted;
+    [SerializeField] private bool _isInvestigating;
+    [SerializeField] private bool _isSeeingPlayer;
     int i = 0;
 
 
@@ -34,7 +37,23 @@ public class Enemy : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Destroy(collision.gameObject);
+            _playerSpotted = true;
+            if (_isInvestigating == false)
+            {
+                StartCoroutine(Investigating());
+            }
+            if (_isSeeingPlayer == false)
+            {
+                StartCoroutine(SeeingPlayer());
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            _playerSpotted = false;
         }
     }
     private void Update()
@@ -129,5 +148,32 @@ public class Enemy : MonoBehaviour
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+    }
+
+    IEnumerator SeeingPlayer()
+    {
+        _isSeeingPlayer = true;
+        yield return new WaitForSeconds(1);
+
+        if (_playerSpotted)
+        {
+            Debug.Log("Player spotted");
+            Destroy(Player);
+        }
+
+        _isSeeingPlayer = false;
+    }
+    IEnumerator Investigating()
+    {
+        _isInvestigating = true;
+        gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        followSpeed = 0;
+       
+        yield return new WaitForSeconds(5);
+
+        _isInvestigating = false;
+        followSpeed = 2;
+     
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 }

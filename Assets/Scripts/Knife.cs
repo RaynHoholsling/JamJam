@@ -5,21 +5,22 @@ using UnityEngine.Rendering.Universal;
 
 public class Knife : MonoBehaviour
 {
-    private bool isTouchingEnemy = false;
+    private GameObject _enemy;
+    [SerializeField] private bool _isTouchingEnemy = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        isTouchingEnemy = true;
+        _enemy = collision.gameObject;
+        _isTouchingEnemy = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        isTouchingEnemy = false;
+        _isTouchingEnemy = false;
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && isTouchingEnemy == true)
+        if (Input.GetMouseButtonDown(0) && _isTouchingEnemy)
         {
-            //GameObject obj = GameObject.FindGameObjectWithTag("Enemy");
-            Destroy(gameObject);
+            Destroy(_enemy);
         }
     }
 }
