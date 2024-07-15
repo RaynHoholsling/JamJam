@@ -9,8 +9,6 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private int hp;
     [SerializeField] private float followSpeed;
-    [SerializeField] private int damage;
-    [SerializeField] private Transform bulletHit;
     [SerializeField] private GameObject Player;
     Animator animator;
     private bool isFlipped = false; 
@@ -20,7 +18,6 @@ public class Enemy : MonoBehaviour
     public Transform[] moveSpots;
     [SerializeField]  private float waitTime;
     public float startWaitTime;
-    private bool warning = false;
     [SerializeField] private bool _playerSpotted;
     [SerializeField] private bool _isInvestigating;
     [SerializeField] private bool _isSeeingPlayer;
@@ -31,6 +28,16 @@ public class Enemy : MonoBehaviour
     {
         waitTime = startWaitTime;
         nextSpot = moveSpots[0];
+        if (transform.position.x < nextSpot.GetComponent<Transform>().position.x && isFlipped == true)
+        {
+            Flip();
+            isFlipped = false;
+        }
+        else if (transform.position.x > nextSpot.GetComponent<Transform>().position.x && isFlipped == false)
+        {
+            Flip();
+            isFlipped = true;
+        }
         animator = GetComponent<Animator>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,7 +63,11 @@ public class Enemy : MonoBehaviour
             _playerSpotted = false;
         }
     }
-    private void Update()
+    public virtual void TakeDamage(int damage)
+    {
+        hp -= damage;
+    }
+        private void Update()
     {
         if (animator)
         {
@@ -101,47 +112,6 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-    //private void FixedUpdate()
-    //{
-    ////    if (isTouchingPlayer == false)
-    ////    {
-    ////        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, followSpeed * Time.deltaTime);
-    ////    }
-              
-    //    //if (player.GetComponent<Transform>().position.x > transform.position.x && isFlipped == false)
-    //    //{
-    //    //    Flip();
-    //    //    isFlipped = true;
-    //    //}
-    //    //else if (player.GetComponent<Transform>().position.x < transform.position.x && isFlipped == true)
-    //    //{
-    //    //    Flip();
-    //    //    isFlipped = false;
-    //    //}
-
-    //    //////distance = Vector2.Distance(player.transform.position, transform.position);
-    //    //////RaycastHit2D hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position).normalized);
-    //    //////bulletHit.position = hit.point;
-
-    //}
-
-    //void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        isTouchingPlayer = true;
-    //    }
-    //}
-
-    //void OnCollisionExit2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        isTouchingPlayer = false;
-    //    }
-    //}
-
-
     void Flip()
     {
         facingRight = !facingRight;

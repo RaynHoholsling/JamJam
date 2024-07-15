@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        if ((transform.position.x >= 100 || transform.position.x <= -100) || (transform.position.y >= 100 || transform.position.y <= -100))
+        if ((transform.position.x >= 500 || transform.position.x <= -500) || (transform.position.y >= 500 || transform.position.y <= -500))
         {
             Destroy(gameObject);
         }
@@ -16,11 +16,11 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.collider != null) && (collision.collider.CompareTag("Player") == false) && (collision.collider.CompareTag("PlayerProjectile") == false))
+        if ((collision.collider != null) && (collision.collider.CompareTag("Player") == false))
         {
             if (collision.gameObject.CompareTag("Enemy"))
             {
-                collision.gameObject.GetComponent<Health>().TakeDamage(damage);
+                collision.gameObject.GetComponent<Enemy>().TakeDamage(damage);
             }
             Destroy(gameObject);
         }
