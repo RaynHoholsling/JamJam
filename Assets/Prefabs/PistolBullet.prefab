@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8230449276419080765}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.5423301, w: 0.8401655}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7290341, w: 0.6844773}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92e77abf5190fe04e954c844ff8fd311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 10
+  velocity: 25
   damage: 100
 --- !u!58 &-8437783437575512076
 CircleCollider2D:

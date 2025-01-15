@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private bool facingRight = true;
     [SerializeField] private GameObject player;
+    public bool _ammoCrateIsAvailable;
     Animator animator;
     Vector2 movement;
 
@@ -65,18 +66,28 @@ public class Player : MonoBehaviour
         GameObject.FindGameObjectWithTag("Weapon").GetComponent<Transform>().localScale = WeaponScaler;
     }
 
-    //private void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.CompareTag("DoorTrigger"))
-    //    {
-    //        doors.SetActive(true);
-    //    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Level2Trigger"))
+        {
+            Debug.Log("Helolo");
+            SceneManager.LoadScene(1);
+        }
+    }
 
-    //    if (other.CompareTag("Health"))
-    //    {
-    //        GetComponent<Health>().health += 50;
-    //        GameObject.FindGameObjectWithTag("HP").GetComponent<Image>().fillAmount += 0.5f;
-    //        Destroy(other.gameObject);
-    //    }
-    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("AmmoCrate"))
+        {
+            _ammoCrateIsAvailable = true;
+        }      
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("AmmoCrate"))
+        {
+            _ammoCrateIsAvailable = false;
+        }
+    }
 }

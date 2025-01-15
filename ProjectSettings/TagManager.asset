@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Weapon
   - Enemy
+  - EnemyStatic
+  - Level2Trigger
+  - Level3Trigger
+  - AmmoCrate
   layers:
   - Default
   - TransparentFX

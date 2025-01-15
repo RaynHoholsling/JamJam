@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     private bool isFlipped = false; 
     private bool facingRight = true;
 
+
     private Transform nextSpot;
     public Transform[] moveSpots;
     [SerializeField]  private float waitTime;
@@ -21,6 +22,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool _playerSpotted;
     [SerializeField] private bool _isInvestigating;
     [SerializeField] private bool _isSeeingPlayer;
+    [SerializeField] private Sprite deadSprite;
+    [SerializeField] private GameObject _deadBody;
     int i = 0;
 
 
@@ -63,19 +66,17 @@ public class Enemy : MonoBehaviour
             _playerSpotted = false;
         }
     }
-    public virtual void TakeDamage(int damage)
+    public void Die()
     {
-        hp -= damage;
+        Instantiate(_deadBody, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
-        private void Update()
+
+    private void Update()
     {
         if (animator)
         {
             animator.SetBool("Run", Mathf.Abs(waitTime) >= startWaitTime);
-        }
-        if (hp <= 0)
-        {
-            Destroy(gameObject);
         }
       
         transform.position = Vector2.MoveTowards(transform.position, nextSpot.position, followSpeed * Time.deltaTime);

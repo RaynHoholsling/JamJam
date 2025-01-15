@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class Kar98 : MonoBehaviour
 {
@@ -10,8 +11,10 @@ public class Kar98 : MonoBehaviour
     [SerializeField] private int magazineSizeStart;
     [SerializeField] private float fireRate;
     [SerializeField] private float magazineSize;
+    [SerializeField] private AudioSource _shotSound;
 
     public bool shotCooldownEnded = true;
+    [SerializeField] private bool _isInBattle = false;
     private bool isLoading = false;
     public bool cartridgeLoaded = true;
     [SerializeField] private bool reloadStarted = false;
@@ -31,8 +34,15 @@ public class Kar98 : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, rotationZ);
         projectile.transform.rotation = transform.rotation;
 
-        if (Input.GetMouseButtonDown(0) && magazineSize > 0 && shotCooldownEnded == true)
+        if (Input.GetMouseButtonDown(0) && magazineSize > 0 && shotCooldownEnded == true && (GetComponentInParent<AmmoManager>().currentRifleAmmo > 0))
         {
+            if(_isInBattle == false)
+            {
+                ////
+            }
+
+            GetComponentInParent<AmmoManager>().currentRifleAmmo--;
+            _shotSound.Play();
             reloadStarted = false;
             isLoading = false;
             StopCoroutine(LoadCartridge());
