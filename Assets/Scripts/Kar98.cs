@@ -34,7 +34,7 @@ public class Kar98 : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, rotationZ);
         projectile.transform.rotation = transform.rotation;
 
-        if (Input.GetMouseButtonDown(0) && magazineSize > 0 && shotCooldownEnded == true && (GetComponentInParent<AmmoManager>().currentRifleAmmo > 0))
+        if (Input.GetMouseButtonDown(0) && magazineSize > 0 && shotCooldownEnded == true /*&& (GetComponentInParent<AmmoManager>().currentRifleAmmo > 0)*/)
         {
             if(_isInBattle == false)
             {
@@ -79,7 +79,10 @@ public class Kar98 : MonoBehaviour
         cartridgeLoaded = false;
         yield return new WaitForSeconds(reloadStart / magazineSizeStart);
         if (isLoading)
-            magazineSize++;
+            if (magazineSize == 0)
+                magazineSize = 5;
+            else
+                magazineSize++;
         cartridgeLoaded = true;
     }
 }

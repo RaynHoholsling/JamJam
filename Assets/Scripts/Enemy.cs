@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     public Transform[] moveSpots;
     [SerializeField]  private float waitTime;
     public float startWaitTime;
+    [SerializeField] private bool isGoingBack;
     [SerializeField] private bool _playerSpotted;
     [SerializeField] private bool _isInvestigating;
     [SerializeField] private bool _isSeeingPlayer;
@@ -97,10 +98,15 @@ public class Enemy : MonoBehaviour
                     isFlipped = true;
                 }
 
-                if (i == moveSpots.Length - 1)
+                if (i == moveSpots.Length - 1 || isGoingBack == true )
                 {
                     i --;
-                }
+                    isGoingBack = true;
+                    if (i == 0)
+                    {
+                        isGoingBack = false;
+                    }                   
+                }              
                 else
                 {
                     i++;
