@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public bool _ammoCrateIsAvailable;
     Animator animator;
     Vector2 movement;
+    [SerializeField] private GameObject _deadBody;
 
     private void Start()
     {
@@ -49,11 +50,10 @@ public class Player : MonoBehaviour
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
-    private void OnDestroy()
-    {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(currentSceneName);
-    }
+    //private void OnDestroy()
+    //{
+    //    StartCoroutine(Deading());      
+    //}
     private void Flip()
     {
         facingRight = !facingRight;
@@ -89,5 +89,17 @@ public class Player : MonoBehaviour
         {
             _ammoCrateIsAvailable = false;
         }
+    }
+    public void Die()
+    {
+        Instantiate(_deadBody, transform.position, Quaternion.identity);
+        StartCoroutine(Deading());
+    }
+
+    IEnumerator Deading()
+    {
+        yield return new WaitForSeconds(5);
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 }

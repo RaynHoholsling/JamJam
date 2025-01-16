@@ -10,6 +10,8 @@ TagManager:
   - Level2Trigger
   - Level3Trigger
   - AmmoCrate
+  - Inside
+  - Outside
   layers:
   - Default
   - TransparentFX

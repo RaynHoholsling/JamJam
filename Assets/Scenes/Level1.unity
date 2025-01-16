@@ -517,7 +517,7 @@ MonoBehaviour:
   _isInvestigating: 0
   _isSeeingPlayer: 0
   deadSprite: {fileID: 21300000, guid: 6500dcb79e0e95a47a01fe86d68cdb28, type: 3}
-  _deadBody: {fileID: 155729241}
+  _deadBody: {fileID: 69112768815675817, guid: 9ed3266d1d40b114385f145f29696542, type: 3}
 --- !u!4 &155729245
 Transform:
   m_ObjectHideFlags: 0
@@ -1674,6 +1674,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1521744222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1521744223}
+  m_Layer: 0
+  m_Name: GameObject (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1521744223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521744222}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2051799405}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1567915654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,7 +1802,7 @@ GameObject:
   - component: {fileID: 1592240197}
   m_Layer: 0
   m_Name: Inside
-  m_TagString: Untagged
+  m_TagString: Inside
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3491,13 +3522,14 @@ GameObject:
   - component: {fileID: 1701102666}
   - component: {fileID: 1701102667}
   - component: {fileID: 1701102668}
+  - component: {fileID: 1701102669}
   m_Layer: 0
   m_Name: Artillery
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1701102666
 Transform:
   m_ObjectHideFlags: 0
@@ -3507,7 +3539,7 @@ Transform:
   m_GameObject: {fileID: 1701102665}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -40.19, y: -2.37, z: -1.13}
+  m_LocalPosition: {x: -36.36, y: 11.55, z: -1.13}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3527,8 +3559,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointUpper1: {fileID: 1835201747}
   pointUpper2: {fileID: 1855885715}
-  pointDown1: {fileID: 0}
-  Player: {fileID: 2051799399}
+  pointDown1: {fileID: 1521744222}
+  player: {fileID: 2051799399}
 --- !u!212 &1701102668
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3581,6 +3613,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &1701102669
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1701102665}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.0001
 --- !u!1 &1835201747
 GameObject:
   m_ObjectHideFlags: 0
@@ -3606,7 +3673,7 @@ Transform:
   m_GameObject: {fileID: 1835201747}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.209999, y: 0, z: 0}
+  m_LocalPosition: {x: -5.06, y: 3.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3637,7 +3704,7 @@ Transform:
   m_GameObject: {fileID: 1855885715}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.9799995, y: 0, z: 0}
+  m_LocalPosition: {x: 5.1299973, y: 3.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3656,7 +3723,7 @@ GameObject:
   - component: {fileID: 1924498095}
   m_Layer: 0
   m_Name: Bridges
-  m_TagString: Untagged
+  m_TagString: Outside
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3998,8 +4065,9 @@ MonoBehaviour:
   moveSpeed: 5
   rb: {fileID: 2051799402}
   facingRight: 1
-  player: {fileID: 0}
+  player: {fileID: 69112768815675817, guid: 9ed3266d1d40b114385f145f29696542, type: 3}
   _ammoCrateIsAvailable: 0
+  _deadBody: {fileID: 69112768815675817, guid: 9ed3266d1d40b114385f145f29696542, type: 3}
 --- !u!212 &2051799404
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4061,14 +4129,15 @@ Transform:
   m_GameObject: {fileID: 2051799399}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.85, y: -5, z: -1.13}
+  m_LocalPosition: {x: -31.22, y: 5.78, z: -1.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 699343697}
   - {fileID: 1198753078}
   - {fileID: 1835201748}
   - {fileID: 1855885716}
+  - {fileID: 1521744223}
+  - {fileID: 699343697}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2058579651
@@ -4220,7 +4289,7 @@ GameObject:
   - component: {fileID: 2145920937}
   m_Layer: 0
   m_Name: Outside
-  m_TagString: Untagged
+  m_TagString: Outside
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
