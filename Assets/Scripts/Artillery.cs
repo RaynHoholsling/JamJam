@@ -9,7 +9,7 @@ public class Artillery : MonoBehaviour
     [SerializeField] GameObject pointUpper2;
     [SerializeField] GameObject pointDown1;
     [SerializeField] GameObject player;
-    private float radiusOfDestruction;
+    [SerializeField] private float radiusOfDestruction;
 
 
 
@@ -18,38 +18,36 @@ public class Artillery : MonoBehaviour
         StartCoroutine(Shelling());
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Outside")
-        {
-            radiusOfDestruction = 1.5f;
-            Debug.Log("Lox");
-        }
-        else
-        {
-            radiusOfDestruction = 3;
-            Debug.Log("Lox");
-        }
-    }
+
     void ArtilleryShells()
     {
-        Collider2D collision = new();
-        if (collision.tag == "Outside")
-        {
-            radiusOfDestruction = 1.5f;
-            Debug.Log("Lox");
-        }
-        else
-        {
-            radiusOfDestruction = 3;
-            Debug.Log("Lox");
-        }
+        //Vector2 position = new Vector2(Random.Range(pointUpper1.transform.position.x, pointUpper2.transform.position.x), Random.Range(pointUpper1.transform.position.y, pointDown1.transform.position.y));
+        //transform.position = position;
+        //Collider2D[] collision = Physics2D.OverlapCircleAll(transform.position, 1);
+        //if (collision.Length > 0)
+        //{
+        //    foreach (Collider2D col in collision)
+        //    {
+        //        if (col.tag == "Inside")
+        //        {
+        //            radiusOfDestruction = 3;
+        //            Debug.Log("dibil");
+        //            break;
+        //        }
+        //        else 
+        //        {
+        //            radiusOfDestruction = 1.5f;
+        //            Debug.Log("Lox");
+        //        }
+        //    }
+        //}
+
 
         StartCoroutine(MuzzleFlash());
         Vector2 position = new Vector2(Random.Range(pointUpper1.transform.position.x, pointUpper2.transform.position.x), Random.Range(pointUpper1.transform.position.y, pointDown1.transform.position.y));
         transform.position = position;
         Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, radiusOfDestruction);
-        
+
         if (collider2D.Length > 0)
         {
             foreach (Collider2D col in collider2D)

@@ -98,7 +98,7 @@ public class Player : MonoBehaviour
 
     IEnumerator Deading()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
