@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     Animator animator;
     Vector2 movement;
     [SerializeField] private GameObject _deadBody;
+    private bool machinegunNear = false;
+    private bool machinegunEnabled;
 
 
     private void Start()
@@ -32,6 +34,22 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.E) && machinegunNear == true)
+        {
+            machinegunNear = false;
+            weaponControle.SetActive(false);
+            machinegun.GetComponent<MachineGun>().enabled = true;
+            machinegunEnabled = true;
+            moveSpeed = 0;
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && machinegunEnabled == true)
+        {
+            machinegunNear = true;
+            moveSpeed = 3.5f;
+            weaponControle.SetActive(true);
+            machinegun.GetComponent<MachineGun>().enabled = false;
+            machinegunEnabled = false;
+        }
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         if (animator)
@@ -40,14 +58,14 @@ public class Player : MonoBehaviour
         }
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if (!facingRight && mousePosition.x > transform.position.x)
-        {
-            Flip();
-        }
-        else if (facingRight && mousePosition.x < transform.position.x)
-        {
-            Flip();
-        }
+        //if (!facingRight && mousePosition.x > transform.position.x)
+        //{
+        //    Flip();
+        //}
+        //else if (facingRight && mousePosition.x < transform.position.x)
+        //{
+        //    Flip();
+        //}
     }
 
     private void FixedUpdate()
@@ -58,42 +76,49 @@ public class Player : MonoBehaviour
     //{
     //    StartCoroutine(Deading());      
     //}
-    private void Flip()
-    {
-        facingRight = !facingRight;
-        Vector3 Scaler = transform.localScale;
-        Vector3 WeaponScaler = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Transform>().localScale;
-        Scaler.x *= -1;
-        transform.localScale = Scaler;
-        WeaponScaler.x *= -1;
-        WeaponScaler.y *= -1;
-        GameObject.FindGameObjectWithTag("Weapon").GetComponent<Transform>().localScale = WeaponScaler;
-    }
+    //private void Flip()
+    //{
+    //    facingRight = !facingRight;
+    //    Vector3 Scaler = transform.localScale;
+    //    Vector3 WeaponScaler = GameObject.FindGameObjectWithTag("Weapon").GetComponent<Transform>().localScale;
+    //    Scaler.x *= -1;
+    //    transform.localScale = Scaler;
+    //    WeaponScaler.x *= -1;
+    //    WeaponScaler.y *= -1;
+    //    GameObject.FindGameObjectWithTag("Weapon").GetComponent<Transform>().localScale = WeaponScaler;
+    //}
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Level2Trigger"))
+        if (collision.CompareTag("Level2Trigger"))
         {
             Debug.Log("Helolo");
             SceneManager.LoadScene(1);
         }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        bool machinegunEnebled = false;
-        if (collision.tag == "MachineGun" && Input.GetKeyDown(KeyCode.E))
-        {
-            weaponControle.SetActive(false);
-            machinegun.GetComponent<MachineGun>().enabled = true;
-            machinegunEnebled = true;
-        }
-        else if(collision.tag == "MachineGun" && Input.GetKeyDown(KeyCode.E) && machinegunEnebled == true)
-        {
-            weaponControle.SetActive(true);
-            machinegun.GetComponent<MachineGun>().enabled = false;
+        if (collision.tag == "MachineGun")
+        {         
+            machinegunNear = true;          
         }
         
     }
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    bool machinegunEnabled = false;
+    //    if (collision.tag == "MachineGun" && Input.GetKeyDown(KeyCode.E))
+    //    {
+    //        weaponControle.SetActive(false);
+    //        machinegun.GetComponent<MachineGun>().enabled = true;
+    //        machinegunEnabled = true;
+    //        moveSpeed = 0;
+    //    }
+    //    else if(collision.tag == "MachineGun" && Input.GetKeyDown(KeyCode.E) && machinegunEnabled == true)
+    //    {
+    //        weaponControle.SetActive(true);
+    //        machinegun.GetComponent<MachineGun>().enabled = false;
+    //    }
+
+    //}
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
