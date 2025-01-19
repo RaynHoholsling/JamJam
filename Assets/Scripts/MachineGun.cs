@@ -31,6 +31,11 @@ public class MachineGun : MonoBehaviour
             reloadStarted = true;
 
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        if (difference.y < 2)
+        {
+            difference.y = 2;
+        }
+        
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, rotationZ);
         projectile.transform.rotation = transform.rotation;
