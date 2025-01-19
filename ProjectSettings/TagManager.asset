@@ -12,6 +12,7 @@ TagManager:
   - AmmoCrate
   - Inside
   - Outside
+  - MachineGun
   layers:
   - Default
   - TransparentFX

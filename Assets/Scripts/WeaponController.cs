@@ -12,6 +12,11 @@ public class WeaponController : MonoBehaviour
 
     void Update()
     {
+        //if (collision.tag == "PLayer" && Input.GetKeyDown(KeyCode.E))
+        //{
+
+        //}
+
         int previousSelectedWeapon = selectedWeapon;
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.Animations;
 using UnityEngine.SceneManagement;
@@ -10,10 +11,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private bool facingRight = true;
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject machinegun;
+    [SerializeField] private GameObject weaponControle;
     public bool _ammoCrateIsAvailable;
     Animator animator;
     Vector2 movement;
     [SerializeField] private GameObject _deadBody;
+
 
     private void Start()
     {
@@ -74,14 +78,32 @@ public class Player : MonoBehaviour
             SceneManager.LoadScene(1);
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        bool machinegunEnebled = false;
+        if (collision.tag == "MachineGun" && Input.GetKeyDown(KeyCode.E))
+        {
+            weaponControle.SetActive(false);
+            machinegun.GetComponent<MachineGun>().enabled = true;
+            machinegunEnebled = true;
+        }
+        else if(collision.tag == "MachineGun" && Input.GetKeyDown(KeyCode.E) && machinegunEnebled == true)
+        {
+            weaponControle.SetActive(true);
+            machinegun.GetComponent<MachineGun>().enabled = false;
+        }
+        
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("AmmoCrate"))
         {
             _ammoCrateIsAvailable = true;
-        }      
+        }
+        
     }
+    
 
     private void OnCollisionExit2D(Collision2D collision)
     {
