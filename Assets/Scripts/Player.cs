@@ -13,13 +13,11 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject machinegun;
     [SerializeField] private GameObject weaponControle;
+    public bool machinegunNear = false;
     public bool _ammoCrateIsAvailable;
     Animator animator;
     Vector2 movement;
     [SerializeField] private GameObject _deadBody;
-    private bool machinegunNear = false;
-    private bool machinegunEnabled;
-
 
     private void Start()
     {
@@ -29,23 +27,7 @@ public class Player : MonoBehaviour
     
 
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && machinegunNear == true)
-        {
-            machinegunNear = false;
-            weaponControle.SetActive(false);
-            machinegun.GetComponent<MachineGun>().enabled = true;
-            machinegunEnabled = true;
-            moveSpeed = 0;
-        }
-        else if (Input.GetKeyDown(KeyCode.E) && machinegunEnabled == true)
-        {
-            machinegunNear = true;
-            moveSpeed = 3.5f;
-            weaponControle.SetActive(true);
-            machinegun.GetComponent<MachineGun>().enabled = false;
-            machinegunEnabled = false;
-        }
+    {       
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         if (animator)

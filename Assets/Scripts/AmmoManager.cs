@@ -7,8 +7,6 @@ public class AmmoManager : MonoBehaviour
     [SerializeField] private int _pistolAmmo;
     [SerializeField] public int currentRifleAmmo;
     [SerializeField] public int currentPistolammo;
-    [SerializeField] public int _machinegunAmmo;
-    [SerializeField] public int currentMachinegunAmmo;
 
     
     void Start()
