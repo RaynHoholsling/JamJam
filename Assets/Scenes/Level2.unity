@@ -63780,6 +63780,7 @@ GameObject:
   - component: {fileID: 1383913415}
   - component: {fileID: 1383913414}
   - component: {fileID: 1383913413}
+  - component: {fileID: 1383913416}
   - component: {fileID: 1383913412}
   - component: {fileID: 1383913411}
   - component: {fileID: 1383913410}
@@ -63901,6 +63902,7 @@ MonoBehaviour:
   player: {fileID: 69112768815675817, guid: 9ed3266d1d40b114385f145f29696542, type: 3}
   machinegun: {fileID: 1153125969}
   weaponControle: {fileID: 1602789998}
+  machinegunNear: 0
   _ammoCrateIsAvailable: 0
   _deadBody: {fileID: 69112768815675817, guid: 9ed3266d1d40b114385f145f29696542, type: 3}
 --- !u!212 &1383913414
@@ -63975,6 +63977,21 @@ Transform:
   - {fileID: 1244746370}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1383913416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383913409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f3f4397c7b1c2441b7b295511780aa5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  machinegun: {fileID: 1153125969}
+  weaponControle: {fileID: 1602789998}
+  cam: {fileID: 1244746367}
 --- !u!1 &1436741152
 GameObject:
   m_ObjectHideFlags: 0
@@ -64307,8 +64324,6 @@ MonoBehaviour:
   _pistolAmmo: 0
   currentRifleAmmo: 3
   currentPistolammo: 0
-  _machinegunAmmo: 999
-  currentMachinegunAmmo: 999
 --- !u!114 &1602790001
 MonoBehaviour:
   m_ObjectHideFlags: 0
