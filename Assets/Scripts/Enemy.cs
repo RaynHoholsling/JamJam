@@ -120,9 +120,9 @@ private void OnTriggerExit2D(Collider2D collision)
 
     private void FixedUpdate()
     {
-        RaycastHit2D hitPlayer = Physics2D.Raycast(_rayObject.transform.position, Vector2.right * _rayScaler);
-        RaycastHit2D hitPlayerUp = Physics2D.Raycast(_rayObject.transform.position, _rayScaler * 0.5f * Vector2.up);
-        RaycastHit2D hitPlayerDown = Physics2D.Raycast(_rayObject.transform.position, Vector2.down * _rayScaler * 0.5f);
+        RaycastHit2D hitPlayer = Physics2D.Raycast(_rayObject.transform.position, Vector2.right, _rayScaler * _rayCastDistance);
+        RaycastHit2D hitPlayerUp = Physics2D.Raycast(_rayObject.transform.position, Vector2.up, _rayScaler * 0.5f * _rayCastDistance);
+        RaycastHit2D hitPlayerDown = Physics2D.Raycast(_rayObject.transform.position, Vector2.down, _rayScaler * 0.5f * _rayCastDistance);
         Debug.DrawRay(_rayObject.transform.position, Vector2.right * _rayCastDistance * _rayScaler, Color.red);
         Debug.DrawRay(_rayObject.transform.position, Vector2.up * _rayCastDistance * _rayScaler * 0.5f, Color.red);
         Debug.DrawRay(_rayObject.transform.position, Vector2.down * _rayCastDistance * _rayScaler * 0.5f, Color.red);

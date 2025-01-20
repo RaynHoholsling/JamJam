@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f721928e9fdd1de46a3c2f1f11d2491f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 8230449276419080765, guid: e851d448a267c9d499ed79f72bb8689a, type: 3}
+  projectile: {fileID: 2356175995959613647, guid: 79ccadfd9e73dfd4a89861290459a04b, type: 3}
   shotPoint: {fileID: 2058579652}
   reloadStart: 5
   magazineSizeStart: 5
@@ -1526,8 +1526,6 @@ MonoBehaviour:
   _pistolAmmo: 0
   currentRifleAmmo: 0
   currentPistolammo: 0
-  _machinegunAmmo: 0
-  currentMachinegunAmmo: 0
 --- !u!1 &1226690744
 GameObject:
   m_ObjectHideFlags: 0
@@ -4188,6 +4186,7 @@ MonoBehaviour:
   player: {fileID: 69112768815675817, guid: 9ed3266d1d40b114385f145f29696542, type: 3}
   machinegun: {fileID: 0}
   weaponControle: {fileID: 0}
+  machinegunNear: 0
   _ammoCrateIsAvailable: 0
   _deadBody: {fileID: 69112768815675817, guid: 9ed3266d1d40b114385f145f29696542, type: 3}
 --- !u!212 &2051799404
