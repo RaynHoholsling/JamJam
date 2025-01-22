@@ -63621,7 +63621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b62fb69e8f905f4da388cf735b219a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 8230449276419080765, guid: e851d448a267c9d499ed79f72bb8689a, type: 3}
+  projectile: {fileID: 2356175995959613647, guid: 79ccadfd9e73dfd4a89861290459a04b, type: 3}
   shotPoint: {fileID: 363908371}
   reloadStart: 5
   magazineSizeStart: 100
