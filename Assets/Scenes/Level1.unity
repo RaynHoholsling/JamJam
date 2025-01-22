@@ -3308,7 +3308,7 @@ GameObject:
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1701102666
 Transform:
   m_ObjectHideFlags: 0
@@ -4189,6 +4189,7 @@ MonoBehaviour:
   machinegunNear: 0
   _ammoCrateIsAvailable: 0
   _deadBody: {fileID: 69112768815675817, guid: 9ed3266d1d40b114385f145f29696542, type: 3}
+  inBlindage: 0
 --- !u!212 &2051799404
 SpriteRenderer:
   m_ObjectHideFlags: 0

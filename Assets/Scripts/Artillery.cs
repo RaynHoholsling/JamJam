@@ -9,7 +9,8 @@ public class Artillery : MonoBehaviour
     [SerializeField] GameObject pointUpper2;
     [SerializeField] GameObject pointDown1;
     [SerializeField] GameObject player;
-    [SerializeField] private float radiusOfDestruction;
+    [SerializeField] GameObject shell;
+    [SerializeField] public float radiusOfDestruction;
 
 
 
@@ -18,58 +19,25 @@ public class Artillery : MonoBehaviour
         StartCoroutine(Shelling());
     }
 
+    //void ArtilleryRadius()
+    //{
+    //    Vector2 position = new Vector2(Random.Range(pointUpper1.transform.position.x, pointUpper2.transform.position.x), Random.Range(pointUpper1.transform.position.y, pointDown1.transform.position.y));
+    //    transform.position = position;
+    //    Collider2D[] collision = Physics2D.OverlapCircleAll(transform.position, 0.1f);
+    //}
+
 
     void ArtilleryShells()
     {
-        //Vector2 position = new Vector2(Random.Range(pointUpper1.transform.position.x, pointUpper2.transform.position.x), Random.Range(pointUpper1.transform.position.y, pointDown1.transform.position.y));
-        //transform.position = position;
-        //Collider2D[] collision = Physics2D.OverlapCircleAll(transform.position, 1);
-        //if (collision.Length > 0)
-        //{
-        //    foreach (Collider2D col in collision)
-        //    {
-        //        if (col.tag == "Inside")
-        //        {
-        //            radiusOfDestruction = 3;
-        //            Debug.Log("dibil");
-        //            break;
-        //        }
-        //        else 
-        //        {
-        //            radiusOfDestruction = 1.5f;
-        //            Debug.Log("Lox");
-        //        }
-        //    }
-        //}
-
-
-        StartCoroutine(MuzzleFlash());
-        Vector2 position = new Vector2(Random.Range(pointUpper1.transform.position.x, pointUpper2.transform.position.x), Random.Range(pointUpper1.transform.position.y, pointDown1.transform.position.y));
-        transform.position = position;
-        Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, radiusOfDestruction);
-
-        if (collider2D.Length > 0)
-        {
-            foreach (Collider2D col in collider2D)
-            {
-                if (col.tag == "Player")
-                {
-                    player.GetComponent<Player>().Die();
-                }
-            }
-        }
+        Vector3 newPosition = new Vector3(Random.Range(pointUpper1.transform.position.x, pointUpper2.transform.position.x), Random.Range(pointUpper1.transform.position.y, pointDown1.transform.position.y), 1);
+        GameObject pellet = Instantiate(shell, newPosition, transform.rotation);       
     }
     IEnumerator Shelling()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2.5f);
         
         ArtilleryShells();
         StartCoroutine(Shelling());
     }
-    IEnumerator MuzzleFlash()
-    {
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        yield return new WaitForSeconds(0.1f);
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-    }
+    
 }

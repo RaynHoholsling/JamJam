@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     Animator animator;
     Vector2 movement;
     [SerializeField] private GameObject _deadBody;
+    [SerializeField] public bool inBlindage;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
     
 
     void Update()
-    {       
+    { 
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         if (animator)
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
             Flip();
         }
     }
+
 
     private void FixedUpdate()
     {
@@ -78,9 +80,20 @@ public class Player : MonoBehaviour
             machinegunNear = true;          
         }
         
-    }
-    
 
+    }
+     
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Blindage"))
+        {
+            inBlindage = true;
+        }
+        else 
+        {
+            inBlindage = false;
+        } 
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -88,6 +101,7 @@ public class Player : MonoBehaviour
         {
             _ammoCrateIsAvailable = true;
         }
+        
         
     }
     

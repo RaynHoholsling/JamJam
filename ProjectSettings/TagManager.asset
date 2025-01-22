@@ -13,6 +13,7 @@ TagManager:
   - Inside
   - Outside
   - MachineGun
+  - Blindage
   layers:
   - Default
   - TransparentFX
