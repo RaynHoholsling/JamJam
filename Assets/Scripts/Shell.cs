@@ -12,13 +12,12 @@ public class Shell : MonoBehaviour
         {
             radiusOfDestruction = 3;
             Debug.Log("Inside");
-            Explosion();
         }
     }
 
     private void Start()
     {
-        StartCoroutine(Wait());
+        Explosion();
     }
 
 
@@ -45,11 +44,7 @@ public class Shell : MonoBehaviour
         StartCoroutine(MuzzleFlash());
     }
 
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(0.1f);
-        Explosion();
-    }
+
     IEnumerator MuzzleFlash()
     {
         yield return new WaitForSeconds(2f);
