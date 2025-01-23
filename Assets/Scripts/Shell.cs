@@ -28,6 +28,7 @@ public class Shell : MonoBehaviour
         if (radiusOfDestruction != 3)
         {
             radiusOfDestruction = 1.5f;
+            Debug.Log("Outside");
         }
         Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, radiusOfDestruction);
         if (collider2D.Length > 0)
