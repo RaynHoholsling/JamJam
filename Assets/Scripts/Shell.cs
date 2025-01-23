@@ -15,16 +15,20 @@ public class Shell : MonoBehaviour
             Explosion();
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void Start()
     {
-        radiusOfDestruction = 1.5f;
-        Debug.Log("Outside");
-        Explosion();
+        StartCoroutine(Wait());
     }
+
 
 
     void Explosion()
     {
+        if (radiusOfDestruction != 3)
+        {
+            radiusOfDestruction = 1.5f;
+        }
         Collider2D[] collider2D = Physics2D.OverlapCircleAll(transform.position, radiusOfDestruction);
         if (collider2D.Length > 0)
         {
@@ -40,7 +44,11 @@ public class Shell : MonoBehaviour
         StartCoroutine(MuzzleFlash());
     }
 
-
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Explosion();
+    }
     IEnumerator MuzzleFlash()
     {
         yield return new WaitForSeconds(2f);
