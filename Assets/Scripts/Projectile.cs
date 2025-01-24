@@ -26,6 +26,11 @@ public class Projectile : MonoBehaviour
             {
                 collision.gameObject.GetComponent<EnemyStatic>().Die();
             }
+            else if (collision.gameObject.CompareTag("EnemyInWave"))
+            {
+                collision.gameObject.GetComponent<EnemyInWave>().Die();
+            }
+            
             Destroy(gameObject);
         }
     }
