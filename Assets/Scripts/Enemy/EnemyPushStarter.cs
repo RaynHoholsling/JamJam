@@ -11,12 +11,11 @@ public class EnemyPushStarter : MonoBehaviour
 
     void EnemySpawn()
     {
-        while(enemyQuantity > 0)
+        if (enemyQuantity > 0)
         {
-            Vector3 position = new Vector3(Random.Range(pointX1.transform.position.x, pointX2.transform.position.x), pointX1.transform.position.y, 1);
-            Instantiate(Enemy, position, transform.rotation);
+            StartCoroutine(Wait());
             enemyQuantity--;
-        }       
+        }        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -25,5 +24,12 @@ public class EnemyPushStarter : MonoBehaviour
             EnemySpawn();
         }
     }
-  
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0);
+        Vector3 position = new Vector3(Random.Range(pointX1.transform.position.x, pointX2.transform.position.x), pointX1.transform.position.y, 1);
+        Instantiate(Enemy, position, transform.rotation);
+        EnemySpawn();
+    }
+
 }

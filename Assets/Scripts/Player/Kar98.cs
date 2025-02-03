@@ -23,6 +23,10 @@ public class Kar98 : MonoBehaviour
     {
         magazineSize = magazineSizeStart;
     }
+    private void OnEnable()
+    {
+        shotCooldownEnded = true;
+    }
 
     void Update()
     {

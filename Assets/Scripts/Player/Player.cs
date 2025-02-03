@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Experimental.Animations;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -19,6 +20,8 @@ public class Player : MonoBehaviour
     Vector2 movement;
     [SerializeField] private GameObject _deadBody;
     [SerializeField] public bool inBlindage;
+    int matches = 3;
+    bool isLighted = true;
 
     private void Start()
     {
@@ -28,12 +31,17 @@ public class Player : MonoBehaviour
     
 
     void Update()
-    { 
+    {
+        
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
         if (animator)
         {
             animator.SetBool("Run", Mathf.Abs(movement.x) >= 0.1f);
+        }
+        if (animator)
+        {
+            animator.SetBool("Run", Mathf.Abs(movement.y) >= 0.1f);
         }
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -45,6 +53,22 @@ public class Player : MonoBehaviour
         {
             Flip();
         }
+
+        if (Input.GetKeyDown(KeyCode.L) && matches != 0 && isLighted == false)
+        {
+            gameObject.GetComponent<Light2D>().enabled = true;
+            matches--;
+            isLighted = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.L) && isLighted == true)
+        {
+            gameObject.GetComponent<Light2D>().enabled = false;
+            isLighted = false;
+        }
+            
+
+
+
     }
 
 
@@ -75,14 +99,10 @@ public class Player : MonoBehaviour
             Debug.Log("Helolo");
             SceneManager.LoadScene(1);
         }
-        if (collision.tag == "MachineGun")
-        {         
-            machinegunNear = true;          
-        }
         
-
     }
-     
+
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Blindage"))
@@ -92,7 +112,15 @@ public class Player : MonoBehaviour
         else 
         {
             inBlindage = false;
-        } 
+        }
+        if (collision.tag == "MachineGun")
+        {
+            machinegunNear = true;
+        }
+        else 
+        {
+            machinegunNear = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -100,12 +128,9 @@ public class Player : MonoBehaviour
         if (collision.collider.CompareTag("AmmoCrate"))
         {
             _ammoCrateIsAvailable = true;
-        }
-        
-        
+        }       
     }
     
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("AmmoCrate"))

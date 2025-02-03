@@ -19,7 +19,7 @@ public class PlayerMachinegunController : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E) && player.machinegunNear == true)
+        if (Input.GetKeyDown(KeyCode.E) && player.machinegunNear == true && machinegunEnabled == false)
         {
             player.machinegunNear = false;
             weaponControle.SetActive(false);
@@ -30,7 +30,6 @@ public class PlayerMachinegunController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.E) && machinegunEnabled == true)
         {
-            player.machinegunNear = true;
             player.GetComponent<Player>().enabled = true;
             weaponControle.SetActive(true);
             machinegun.GetComponent<MachineGun>().enabled = false;

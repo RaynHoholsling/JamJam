@@ -6,12 +6,13 @@ public class EnemyInWave : MonoBehaviour
 {
     [SerializeField] private GameObject Player;
     Animator animator;
-    [SerializeField] private float followSpeed;
+    [SerializeField] private float followSpeed = 0;
     [SerializeField] private GameObject _deadBody;
 
     void Start()
     {     
         animator = GetComponent<Animator>();
+        followSpeed = Random.Range(4,5);
     }
 
     void Update()
